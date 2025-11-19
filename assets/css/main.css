@@ -41,6 +41,20 @@
     --shadow-medium: 0 4px 20px rgba(0, 0, 0, 0.15);
     --shadow-heavy: 0 8px 30px rgba(0, 0, 0, 0.25);
     --shadow-gold: 0 4px 20px var(--main-gold-shadow);
+    
+    /* Spacing tokens */
+    --section-padding: 120px;
+    --section-padding-mobile: 80px;
+    --hero-padding-top: 180px;
+    --hero-padding-bottom: 100px;
+    --hero-padding-mobile: 140px;
+    
+    /* Typography sizes */
+    --hero-title-size: 4rem;
+    --hero-title-size-tablet: 3rem;
+    --hero-title-size-mobile: 2.5rem;
+    --section-title-size: 2.5rem;
+    --section-title-size-mobile: 2rem;
 }
 
 /* RESET */
@@ -536,7 +550,7 @@ header.scrolled {
    TYPOGRAPHY
    ========================================================================== */
 .section-title {
-    font-size: 2.5rem;
+    font-size: var(--section-title-size);
     font-weight: var(--font-weight-bold);
     color: var(--main-gold);
     text-transform: uppercase;
@@ -544,6 +558,7 @@ header.scrolled {
     margin-bottom: 1rem;
     text-align: center;
     position: relative;
+    font-family: var(--font-heading);
 }
 
 .section-title::after {
@@ -589,19 +604,19 @@ header.scrolled {
 #about {
     background: #1f1f1f;
     color: var(--ferrari-white);
-    padding: 100px 0;
+    padding: var(--section-padding) 0;
 }
 
 #services {
     background: var(--section-bg-dark);
     color: var(--ferrari-white);
-    padding: 100px 0;
+    padding: var(--section-padding) 0;
 }
 
 #contact {
     background: #1f1f1f;
     color: var(--ferrari-white);
-    padding: 100px 0;
+    padding: var(--section-padding) 0;
 }
 
 /* ==========================================================================
@@ -677,7 +692,7 @@ header.scrolled {
 }
 
 .hero-title {
-    font-size: 4rem;
+    font-size: var(--hero-title-size);
     font-weight: var(--font-weight-bold);
     letter-spacing: 0.1875rem;
     margin-bottom: 1rem;
@@ -686,6 +701,7 @@ header.scrolled {
     max-width: 100%;
     position: relative;
     z-index: 5;
+    font-family: var(--font-heading);
 }
 
 /* Reintroduced hero title ambient animations */
@@ -1828,7 +1844,7 @@ footer a:hover {
     min-height: 50vh;
     display: flex;
     align-items: center;
-    padding: 140px 0 100px;
+    padding: var(--hero-padding-top) 0 var(--hero-padding-bottom);
     position: relative;
 }
 
@@ -1847,12 +1863,14 @@ footer a:hover {
 
 .product-hero-title,
 .about-hero-title {
-    font-size: 4rem;
+    font-size: var(--hero-title-size);
     font-weight: var(--font-weight-bold);
     color: var(--main-gold);
     text-transform: uppercase;
     margin-bottom: 1.5rem;
     line-height: 1.2;
+    font-family: var(--font-heading);
+    letter-spacing: 4px;
 }
 
 .product-hero-subtitle,
@@ -1863,14 +1881,14 @@ footer a:hover {
 }
 
 .product-overview-section {
-    padding: 120px 0;
+    padding: var(--section-padding) 0;
     background: var(--ferrari-black);
 }
 
 .program-features-section,
 .mission-section,
 .values-section {
-    padding: 120px 0;
+    padding: var(--section-padding) 0;
     background: var(--section-bg-dark);
     border-top: 1px solid rgba(212, 175, 55, 0.1);
 }
@@ -2039,7 +2057,7 @@ footer a:hover {
 /* CTA Sections */
 .product-cta-section,
 .about-cta-section {
-    padding: 120px 0;
+    padding: var(--section-padding) 0;
     background: linear-gradient(135deg, var(--section-bg-charcoal) 0%, var(--ferrari-black) 100%);
     text-align: center;
     border-top: 1px solid rgba(212, 175, 55, 0.2);
@@ -2089,7 +2107,7 @@ footer a:hover {
 
 /* Solutions Hero */
 .solutions-hero {
-    padding: 180px 0 100px;
+    padding: var(--hero-padding-top) 0 var(--hero-padding-bottom);
     background: linear-gradient(135deg, var(--ferrari-black) 0%, #1a1a1a 100%);
     text-align: center;
 }
@@ -2101,7 +2119,7 @@ footer a:hover {
 
 .solutions-hero-title {
     font-family: var(--font-heading);
-    font-size: 4rem;
+    font-size: var(--hero-title-size);
     font-weight: 700;
     letter-spacing: 8px;
     color: var(--main-gold);
@@ -2126,7 +2144,7 @@ footer a:hover {
 
 /* Solution Sections */
 .solution-section {
-    padding: 120px 0;
+    padding: var(--section-padding) 0;
     position: relative;
 }
 
@@ -2393,22 +2411,22 @@ footer a:hover {
    ========================================================================== */
 @media (max-width: 768px) {
     .hero-title {
-        font-size: 2.5rem;
+        font-size: var(--hero-title-size-mobile);
     }
     
     .section-title {
-        font-size: 2rem;
+        font-size: var(--section-title-size-mobile);
     }
     
     .product-hero,
     .about-hero {
-        padding: 120px 0 80px;
+        padding: var(--hero-padding-mobile) 0 var(--section-padding-mobile);
         min-height: 60vh;
     }
     
     .product-hero-title,
     .about-hero-title {
-        font-size: 2.5rem;
+        font-size: var(--hero-title-size-mobile);
     }
     
     .product-cta-title,
@@ -2424,7 +2442,7 @@ footer a:hover {
     .product-cta-section,
     .about-cta-section,
     .product-overview-section {
-        padding: 80px 0;
+        padding: var(--section-padding-mobile) 0;
     }
     
     .feature-card,
@@ -2444,11 +2462,11 @@ footer a:hover {
     
     /* Solutions Page Mobile */
     .solutions-hero {
-        padding: 140px 0 80px;
+        padding: var(--hero-padding-mobile) 0 var(--section-padding-mobile);
     }
     
     .solutions-hero-title {
-        font-size: 2.5rem;
+        font-size: var(--hero-title-size-mobile);
         letter-spacing: 4px;
     }
     
@@ -2461,7 +2479,7 @@ footer a:hover {
     }
     
     .solution-section {
-        padding: 80px 0;
+        padding: var(--section-padding-mobile) 0;
     }
     
     .solution-content {
@@ -2509,6 +2527,14 @@ footer a:hover {
 
 /* Tablet adjustments */
 @media (max-width: 1024px) and (min-width: 769px) {
+    .hero-title {
+        font-size: var(--hero-title-size-tablet);
+    }
+    .product-hero-title,
+    .about-hero-title,
+    .solutions-hero-title {
+        font-size: var(--hero-title-size-tablet);
+    }
     .product-cta-title,
     .about-cta-title {
         font-size: 2.4rem;
