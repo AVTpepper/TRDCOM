@@ -757,40 +757,66 @@ header.scrolled {
 }
 
 .service-card {
-    background: var(--ferrari-white);
-    padding: 2.5rem;
-    border-radius: 10px;
-    box-shadow: var(--shadow-light);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    padding: 3rem 2.5rem;
+    border-radius: 15px;
     transition: all 0.4s ease;
     cursor: pointer;
     position: relative;
-    min-height: 400px;
-    border: 2px solid transparent;
+    min-height: 380px;
     text-decoration: none;
     color: inherit;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--main-gold), var(--main-gold-dark));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+
+.service-card:hover::before {
+    transform: scaleX(1);
 }
 
 .service-card:hover {
-    transform: translateY(-15px) scale(1.02);
-    box-shadow: var(--shadow-heavy);
+    transform: translateY(-8px);
+    background: rgba(255, 255, 255, 0.05);
     border-color: var(--main-gold);
+    box-shadow: 0 12px 40px rgba(212, 175, 55, 0.15);
 }
 
 .service-icon {
     width: 60px;
     height: 60px;
-    margin: 0 auto 1.5rem;
+    margin: 0 0 2rem 0;
 }
 
 .service-icon div {
     width: 100%;
     height: 100%;
     background: linear-gradient(135deg, var(--main-gold), var(--main-gold-dark));
-    border-radius: 50%;
+    border-radius: 12px;
     display: flex;
     align-items: center;
         justify-content: center;
         position: relative;
+    transition: all 0.4s ease;
+}
+
+.service-card:hover .service-icon div {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
 }
 
 /* Service icons: add vector glyphs inside the gold circles */
@@ -829,15 +855,17 @@ header.scrolled {
 .service-title {
     font-size: 1.3rem;
     font-weight: var(--font-weight-bold);
-    text-align: center;
-    margin-bottom: 1rem;
-    color: var(--ferrari-black);
+    margin-bottom: 1.25rem;
+    color: var(--main-gold);
+    letter-spacing: 0.5px;
 }
 
 .service-description {
-    text-align: center;
     line-height: 1.7;
-    color: var(--ferrari-gray);
+    color: var(--ferrari-white);
+    opacity: 0.85;
+    flex-grow: 1;
+    font-size: 0.95rem;
 }
 
 .service-overlay {
@@ -846,20 +874,73 @@ header.scrolled {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, var(--ferrari-black), #333);
-    color: var(--main-gold);
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.95), rgba(20, 20, 20, 0.98));
+    color: var(--ferrari-white);
     opacity: 0;
     transform: translateY(100%);
-    transition: all 0.5s ease;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
+    padding: 2.5rem;
+    border-top: 3px solid var(--main-gold);
 }
 
 .service-card:hover .service-overlay {
     opacity: 1;
     transform: translateY(0);
+}
+
+.overlay-content {
+    text-align: left;
+}
+
+.overlay-content h4 {
+    color: var(--main-gold);
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+    font-weight: var(--font-weight-bold);
+}
+
+.overlay-content ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 2rem;
+}
+
+.overlay-content ul li {
+    padding: 0.6rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    color: var(--ferrari-white);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.overlay-content ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--main-gold);
+    font-weight: bold;
+}
+
+.service-cta {
+    margin-top: auto;
+}
+
+.cta-text {
+    color: var(--main-gold);
+    font-weight: var(--font-weight-bold);
+    font-size: 1rem;
+    letter-spacing: 1px;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.service-card:hover .cta-text {
+    transform: translateX(5px);
 }
 
 @media (max-width: 768px) {
