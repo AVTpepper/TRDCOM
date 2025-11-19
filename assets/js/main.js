@@ -18,13 +18,25 @@ document.addEventListener('DOMContentLoaded', function() {
 function initializeLogoIntro() {
     const overlay = document.getElementById('logo-intro-overlay');
     if (overlay) {
-        setTimeout(() => {
-            overlay.style.opacity = '0';
+        // Check if user has already seen the intro in this session
+        const hasSeenIntro = sessionStorage.getItem('hasSeenIntro');
+        
+        if (hasSeenIntro) {
+            // Skip animation - hide overlay immediately
+            overlay.style.display = 'none';
+            document.body.classList.remove('intro-active');
+        } else {
+            // Show animation and mark as seen
             setTimeout(() => {
-                overlay.style.display = 'none';
-                document.body.classList.remove('intro-active');
-            }, 500);
-        }, 5000); // 5 seconds
+                overlay.style.opacity = '0';
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                    document.body.classList.remove('intro-active');
+                    // Mark intro as seen for this session
+                    sessionStorage.setItem('hasSeenIntro', 'true');
+                }, 500);
+            }, 3500); // 3.5 seconds
+        }
     }
 }
 
