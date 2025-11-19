@@ -1124,6 +1124,89 @@ header.scrolled {
     margin-bottom: 4rem;
 }
 
+/* Horizontal Scrolling Review Cards */
+.reviews-carousel-wrapper {
+    overflow: hidden;
+    margin: 4rem 0;
+    padding: 1rem 0 2rem 0;
+    position: relative;
+}
+
+.reviews-carousel-track {
+    display: flex;
+    gap: 2rem;
+    animation: scroll-reviews 40s linear infinite;
+    width: max-content;
+}
+
+@keyframes scroll-reviews {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.reviews-carousel-track:hover {
+    animation-play-state: paused;
+}
+
+.review-card-horizontal {
+    min-width: 400px;
+    max-width: 400px;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, rgba(212, 175, 55, 0.02) 100%);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 15px;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    transition: all var(--transition-normal);
+    flex-shrink: 0;
+}
+
+.review-card-horizontal:hover {
+    transform: translateY(-5px);
+    border-color: var(--main-gold);
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+}
+
+.review-rating {
+    display: flex;
+    gap: 0.3rem;
+}
+
+.review-rating .star {
+    color: var(--main-gold);
+    font-size: 1.2rem;
+}
+
+.review-text {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.9);
+    font-style: italic;
+    flex-grow: 1;
+}
+
+.review-author {
+    border-top: 1px solid rgba(212, 175, 55, 0.2);
+    padding-top: 1rem;
+}
+
+.author-name {
+    color: var(--main-gold);
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+}
+
+.author-title {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+}
+
 /* Horizontal Carousel Container */
 .testimonial-carousel-wrapper {
     overflow: hidden;
@@ -1974,6 +2057,9 @@ footer a:hover {
     color: var(--main-gold);
     margin-bottom: 1.5rem;
     font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: var(--font-heading);
 }
 
 .product-cta-description,
@@ -2049,22 +2135,8 @@ footer a:hover {
 }
 
 .solution-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-}
-
-.solution-content.reverse {
-    direction: ltr;
-}
-
-.solution-content.reverse .solution-text {
-    order: 2;
-}
-
-.solution-content.reverse .solution-visual {
-    order: 1;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 .solution-number {
@@ -2087,15 +2159,15 @@ footer a:hover {
 }
 
 .solution-subtitle {
-    font-size: 1.3rem;
-    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.8);
     font-weight: 300;
     margin-bottom: 2rem;
 }
 
 .solution-description {
-    font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.85);
+    font-size: 1.15rem;
+    color: rgba(255, 255, 255, 0.9);
     line-height: 1.8;
     margin-bottom: 2rem;
 }
@@ -2130,54 +2202,95 @@ footer a:hover {
     font-weight: bold;
 }
 
-/* Solution Visual */
-.solution-visual {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.solution-icon-large {
-    width: 300px;
-    height: 300px;
-    border-radius: 20px;
-    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(212, 175, 55, 0.05) 100%);
-    border: 2px solid rgba(212, 175, 55, 0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all var(--transition-normal);
-}
-
-.solution-section:hover .solution-icon-large {
-    transform: scale(1.05);
-    border-color: var(--main-gold);
-    box-shadow: 0 10px 40px rgba(212, 175, 55, 0.2);
-}
-
-/* Placeholder icons - you can replace these with actual icon classes */
-.icon-development,
-.icon-mentoring,
-.icon-hub,
-.icon-hire {
-    width: 150px;
-    height: 150px;
-    background: var(--main-gold);
-    mask-size: contain;
-    mask-repeat: no-repeat;
-    mask-position: center;
-}
-
 /* Solutions CTA Section */
 .solutions-cta-section {
-    padding: 120px 0;
-    background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, rgba(212, 175, 55, 0.1) 100%);
+    padding: 140px 0;
+    background: radial-gradient(80% 80% at 50% 0%, rgba(212, 175, 55, 0.08) 0%, rgba(0, 0, 0, 0) 70%),
+                linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, rgba(212, 175, 55, 0.1) 100%);
     text-align: center;
 }
 
 .solutions-cta-content {
     max-width: 800px;
     margin: 0 auto;
+}
+
+.solutions-cta-section .cta-title {
+    font-family: var(--font-heading);
+    color: var(--main-gold);
+    font-size: 2.2rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.solutions-cta-section .cta-description {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cta-button-secondary {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: transparent;
+    border: 2px solid var(--main-gold);
+    color: var(--main-gold);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    letter-spacing: 1px;
+    border-radius: 8px;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all var(--transition-normal);
+}
+
+.cta-button-secondary:hover {
+    background: var(--main-gold);
+    color: var(--ferrari-black);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 1rem 3rem;
+    background: transparent;
+    color: var(--main-gold);
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-decoration: none;
+    border: 2px solid var(--main-gold);
+    border-radius: 8px;
+    transition: all var(--transition-normal);
+    text-transform: uppercase;
+    margin-top: 2rem;
+}
+
+.cta-button:hover {
+    background: var(--main-gold);
+    color: var(--ferrari-black);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+}
+
+.cta-button .cta-arrow {
+    margin-left: 0.8rem;
+    transition: transform var(--transition-fast);
+    display: inline-block;
+}
+
+.cta-button:hover .cta-arrow {
+    transform: translateX(5px);
 }
 
 .cta-button-large {
@@ -2198,8 +2311,9 @@ footer a:hover {
 
 .cta-button-large:hover {
     background: var(--ferrari-white);
+    color: var(--ferrari-black);
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+    box-shadow: 0 8px 30px rgba(212, 175, 55, 0.5);
 }
 
 .cta-button-large .cta-arrow {
@@ -2299,7 +2413,8 @@ footer a:hover {
     
     .product-cta-title,
     .about-cta-title {
-        font-size: 2rem;
+        font-size: 1.9rem;
+        letter-spacing: 1.5px;
     }
     
     .program-features-section,
@@ -2350,13 +2465,7 @@ footer a:hover {
     }
     
     .solution-content {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-    
-    .solution-content.reverse .solution-text,
-    .solution-content.reverse .solution-visual {
-        order: unset;
+        max-width: 100%;
     }
     
     .solution-number {
@@ -2372,25 +2481,61 @@ footer a:hover {
         font-size: 1.1rem;
     }
     
-    .solution-icon-large {
-        width: 200px;
-        height: 200px;
-    }
-    
-    .icon-development,
-    .icon-mentoring,
-    .icon-hub,
-    .icon-hire {
-        width: 100px;
-        height: 100px;
-    }
-    
     .solutions-cta-section {
-        padding: 80px 0;
+        padding: 100px 0;
+    }
+    .solutions-cta-section .cta-title {
+        font-size: 1.8rem;
+        letter-spacing: 1.5px;
+    }
+    .solutions-cta-section .cta-description {
+        font-size: 1rem;
     }
     
     .cta-button-large {
         padding: 1.2rem 2.5rem;
+        font-size: 1rem;
+    }
+
+    .cta-buttons {
+        gap: 0.75rem;
+    }
+    .cta-buttons a {
+        width: 100%;
+        max-width: 320px;
+        text-align: center;
+    }
+    
+
+/* Tablet adjustments */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .product-cta-title,
+    .about-cta-title {
+        font-size: 2.4rem;
+        letter-spacing: 2px;
+    }
+    .product-cta-description,
+    .about-cta-description {
+        font-size: 1.15rem;
+    }
+    .solutions-cta-section .cta-title {
+        font-size: 2rem;
+    }
+    .solutions-cta-section .cta-description {
+        font-size: 1.05rem;
+    }
+    .cta-buttons {
+        gap: 0.9rem;
+    }
+}
+    /* Review Cards Mobile */
+    .review-card-horizontal {
+        min-width: 300px;
+        max-width: 300px;
+        padding: 2rem;
+    }
+    
+    .review-text {
         font-size: 1rem;
     }
 }
