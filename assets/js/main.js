@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeBackToTop();
     initializeScrollButtons();
     initializeServicesInteractions();
+    initializeReviewsCarousel();
 });
 
 // Logo Intro Animation
@@ -23,7 +24,7 @@ function initializeLogoIntro() {
                 overlay.style.display = 'none';
                 document.body.classList.remove('intro-active');
             }, 500);
-        }, 10000);
+        }, /* 10000 */1000); // Temporarily set to 1 second for testing
     }
 }
 
@@ -301,4 +302,77 @@ function initializeServicesInteractions() {
             card.style.transform = 'translateY(0)';
         });
     });
+}
+
+// Reviews Carousel
+function initializeReviewsCarousel() {
+    const carousel = document.getElementById('reviewsCarousel');
+    if (!carousel) return;
+    
+    const cards = carousel.querySelectorAll('.review-card');
+    const indicators = document.querySelectorAll('.indicator');
+    const prevBtn = document.querySelector('.carousel-btn.prev');
+    const nextBtn = document.querySelector('.carousel-btn.next');
+    
+    if (cards.length === 0) return;
+    
+    let currentIndex = 0;
+    
+    // Hide all cards except the first one
+    function showCard(index) {
+        cards.forEach((card, i) => {
+            if (i === index) {
+                card.style.display = 'block';
+                card.style.opacity = '0';
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                }, 50);
+            } else {
+                card.style.display = 'none';
+            }
+        });
+        
+        // Update indicators
+        indicators.forEach((indicator, i) => {
+            if (i === index) {
+                indicator.classList.add('active');
+            } else {
+                indicator.classList.remove('active');
+            }
+        });
+        
+        currentIndex = index;
+    }
+    
+    // Initialize - show first card
+    showCard(0);
+    
+    // Previous button
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            const newIndex = currentIndex === 0 ? cards.length - 1 : currentIndex - 1;
+            showCard(newIndex);
+        });
+    }
+    
+    // Next button
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            const newIndex = currentIndex === cards.length - 1 ? 0 : currentIndex + 1;
+            showCard(newIndex);
+        });
+    }
+    
+    // Indicator clicks
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => {
+            showCard(index);
+        });
+    });
+    
+    // Auto-advance carousel every 5 seconds
+    setInterval(() => {
+        const newIndex = currentIndex === cards.length - 1 ? 0 : currentIndex + 1;
+        showCard(newIndex);
+    }, 5000);
 }
