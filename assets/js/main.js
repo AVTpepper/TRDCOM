@@ -24,7 +24,7 @@ function initializeLogoIntro() {
                 overlay.style.display = 'none';
                 document.body.classList.remove('intro-active');
             }, 500);
-        }, /* 10000 */1000); // Temporarily set to 1 second for testing
+        }, 5000); // 5 seconds
     }
 }
 
