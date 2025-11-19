@@ -431,10 +431,38 @@ header.scrolled {
     transition: all var(--transition-normal);
 }
 
-.mobile-nav-link:hover {
+.mobile-nav-link:hover,
+.mobile-nav-link.active {
     color: var(--main-gold);
     background: rgba(212, 175, 55, 0.1);
     padding-left: 2.5rem;
+}
+
+/* Mobile Navigation Submenu */
+.mobile-nav-submenu {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-nav-label {
+    color: var(--main-gold);
+    text-transform: uppercase;
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 1px;
+    padding: 1rem 2rem;
+    background: rgba(212, 175, 55, 0.05);
+    font-size: 0.9rem;
+}
+
+.mobile-nav-submenu .mobile-nav-link {
+    padding-left: 3rem;
+    font-size: 0.95rem;
+    text-transform: none;
+    border-bottom: none;
+}
+
+.mobile-nav-submenu .mobile-nav-link:hover,
+.mobile-nav-submenu .mobile-nav-link.active {
+    padding-left: 3.5rem;
 }
 
 @media (max-width: 1050px) {
@@ -528,9 +556,23 @@ header.scrolled {
 
 .section-subtitle {
     font-size: 1.2rem;
-    color: var(--ferrari-white);
+    color: rgba(255, 255, 255, 0.8);
     margin-bottom: 2rem;
     text-align: center;
+    line-height: 1.6;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.section-header .section-title {
+    margin-bottom: 1.5rem;
+}
+
+.section-header .section-subtitle {
+    margin-bottom: 0;
 }
 
 /* ==========================================================================
@@ -1555,10 +1597,24 @@ footer a:hover {
 .about-hero {
     background: linear-gradient(135deg, var(--ferrari-black) 0%, var(--section-bg-charcoal) 100%);
     color: var(--ferrari-white);
-    min-height: 70vh;
+    min-height: 50vh;
     display: flex;
     align-items: center;
-    padding: 120px 0 80px;
+    padding: 140px 0 100px;
+    position: relative;
+}
+
+/* Remove the dark overlay for product/about hero pages */
+.product-hero .hero-overlay,
+.about-hero .hero-overlay {
+    background: transparent;
+}
+
+.product-hero-content,
+.about-hero-content {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 .product-hero-title,
@@ -1568,19 +1624,41 @@ footer a:hover {
     color: var(--main-gold);
     text-transform: uppercase;
     margin-bottom: 1.5rem;
+    line-height: 1.2;
 }
 
 .product-hero-subtitle,
 .about-hero-subtitle {
     font-size: 1.3rem;
     color: var(--ferrari-white);
+    opacity: 0.9;
+}
+
+.product-overview-section {
+    padding: 120px 0;
+    background: var(--ferrari-black);
 }
 
 .program-features-section,
 .mission-section,
 .values-section {
-    padding: 100px 0;
+    padding: 120px 0;
     background: var(--section-bg-dark);
+    border-top: 1px solid rgba(212, 175, 55, 0.1);
+}
+
+.product-overview-content,
+.mission-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.overview-description,
+.mission-description {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 1.5rem;
 }
 
 .features-grid,
@@ -1588,92 +1666,190 @@ footer a:hover {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 3rem;
+    margin-top: 4rem;
 }
 
 .feature-card,
 .value-card {
     background: rgba(255, 255, 255, 0.05);
-    padding: 2.5rem;
+    padding: 3rem 2.5rem;
     border-radius: 15px;
     border: 1px solid rgba(212, 175, 55, 0.2);
     transition: all var(--transition-normal);
+    text-align: center;
 }
 
 .feature-card:hover,
 .value-card:hover {
     transform: translateY(-10px);
     border-color: var(--main-gold);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 40px rgba(212, 175, 55, 0.15);
 }
 
 .feature-icon,
 .value-icon {
-    width: 60px;
-    height: 60px;
-    background: var(--main-gold);
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--main-gold) 0%, #c9a959 100%);
     border-radius: 50%;
-    margin: 0 auto 1.5rem;
+    margin: 0 auto 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .feature-title,
 .value-title {
     font-size: 1.5rem;
     color: var(--main-gold);
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
     text-align: center;
+    font-weight: var(--font-weight-bold);
+}
+
+.feature-description,
+.value-description {
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.7;
+    font-size: 1.05rem;
 }
 
 .team-section {
-    padding: 100px 0;
-    background: #1f1f1f;
+    padding: 120px 0;
+    background: var(--ferrari-black);
+    border-top: 1px solid rgba(212, 175, 55, 0.1);
+}
+
+.team-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.team-subtitle {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.2rem;
+    margin-top: 1rem;
 }
 
 .team-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 4rem;
+    margin-top: 3rem;
 }
 
 .team-member {
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.03);
     border-radius: 15px;
-    padding: 2.5rem;
+    padding: 3rem;
     transition: all var(--transition-normal);
     text-align: center;
+    border: 1px solid rgba(212, 175, 55, 0.15);
 }
 
 .team-member:hover {
     transform: translateY(-10px);
-    box-shadow: var(--shadow-gold);
+    box-shadow: 0 15px 50px rgba(212, 175, 55, 0.2);
+    border-color: var(--main-gold);
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .team-image-container {
-    width: 150px;
-    height: 150px;
+    width: 180px;
+    height: 180px;
     margin: 0 auto 2rem;
     border-radius: 50%;
     overflow: hidden;
-    border: 3px solid var(--main-gold);
+    border: 4px solid var(--main-gold);
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+}
+
+.team-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .team-name {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     color: var(--main-gold);
     margin-bottom: 0.5rem;
+    font-weight: var(--font-weight-bold);
 }
 
 .team-title {
-    color: var(--ferrari-white);
+    color: rgba(255, 255, 255, 0.8);
     margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+.team-description {
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+}
+
+.team-expertise {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
 }
 
 .expertise-tag {
     background: var(--main-gold);
     color: var(--ferrari-black);
-    padding: 0.3rem 0.8rem;
+    padding: 0.4rem 1rem;
     border-radius: 20px;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     display: inline-block;
-    margin: 0.25rem;
+    font-weight: var(--font-weight-medium);
+}
+
+/* CTA Sections */
+.product-cta-section,
+.about-cta-section {
+    padding: 120px 0;
+    background: linear-gradient(135deg, var(--section-bg-charcoal) 0%, var(--ferrari-black) 100%);
+    text-align: center;
+    border-top: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.product-cta-content,
+.about-cta-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.product-cta-title,
+.about-cta-title {
+    font-size: 3rem;
+    color: var(--main-gold);
+    margin-bottom: 1.5rem;
+    font-weight: var(--font-weight-bold);
+}
+
+.product-cta-description,
+.about-cta-description {
+    font-size: 1.3rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 3rem;
+}
+
+.product-cta-buttons,
+.about-cta-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Values Section Specific */
+.values-header {
+    text-align: center;
+    margin-bottom: 4rem;
 }
 
 /* ==========================================================================
@@ -1717,9 +1893,41 @@ footer a:hover {
         font-size: 2rem;
     }
     
+    .product-hero,
+    .about-hero {
+        padding: 120px 0 80px;
+        min-height: 60vh;
+    }
+    
     .product-hero-title,
     .about-hero-title {
         font-size: 2.5rem;
+    }
+    
+    .product-cta-title,
+    .about-cta-title {
+        font-size: 2rem;
+    }
+    
+    .program-features-section,
+    .mission-section,
+    .values-section,
+    .team-section,
+    .product-cta-section,
+    .about-cta-section,
+    .product-overview-section {
+        padding: 80px 0;
+    }
+    
+    .feature-card,
+    .value-card,
+    .team-member {
+        padding: 2rem;
+    }
+    
+    .team-image-container {
+        width: 150px;
+        height: 150px;
     }
     
     .intro-logo-main {
