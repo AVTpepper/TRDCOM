@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeBackToTop();
     initializeScrollButtons();
     initializeServicesInteractions();
-    initializeReviewsCarousel();
+    initializeHorizontalTestimonialCarousel();
 });
 
 // Logo Intro Animation
@@ -304,33 +304,24 @@ function initializeServicesInteractions() {
     });
 }
 
-// Reviews Carousel
-function initializeReviewsCarousel() {
-    const carousel = document.getElementById('reviewsCarousel');
-    if (!carousel) return;
+// Horizontal Testimonial Carousel with Auto-Scroll
+function initializeHorizontalTestimonialCarousel() {
+    const track = document.getElementById('testimonialCarouselTrack');
+    if (!track) return;
     
-    const cards = carousel.querySelectorAll('.review-card');
-    const indicators = document.querySelectorAll('.indicator');
-    const prevBtn = document.querySelector('.carousel-btn.prev');
-    const nextBtn = document.querySelector('.carousel-btn.next');
+    const slides = track.querySelectorAll('.testimonial-slide');
+    const indicators = document.querySelectorAll('#testimonialIndicators .indicator');
+    const prevBtn = document.getElementById('testimonialPrev');
+    const nextBtn = document.getElementById('testimonialNext');
     
-    if (cards.length === 0) return;
+    if (slides.length === 0) return;
     
     let currentIndex = 0;
+    let autoScrollInterval;
     
-    // Hide all cards except the first one
-    function showCard(index) {
-        cards.forEach((card, i) => {
-            if (i === index) {
-                card.style.display = 'block';
-                card.style.opacity = '0';
-                setTimeout(() => {
-                    card.style.opacity = '1';
-                }, 50);
-            } else {
-                card.style.display = 'none';
-            }
-        });
+    function scrollToSlide(index) {
+        const slideWidth = slides[0].offsetWidth;
+        track.style.transform = `translateX(-${index * slideWidth}px)`;
         
         // Update indicators
         indicators.forEach((indicator, i) => {
@@ -344,35 +335,74 @@ function initializeReviewsCarousel() {
         currentIndex = index;
     }
     
-    // Initialize - show first card
-    showCard(0);
+    function nextSlide() {
+        const newIndex = currentIndex === slides.length - 1 ? 0 : currentIndex + 1;
+        scrollToSlide(newIndex);
+    }
+    
+    function prevSlide() {
+        const newIndex = currentIndex === 0 ? slides.length - 1 : currentIndex - 1;
+        scrollToSlide(newIndex);
+    }
+    
+    // Auto-scroll functionality
+    function startAutoScroll() {
+        autoScrollInterval = setInterval(() => {
+            nextSlide();
+        }, 5000); // Change slide every 5 seconds
+    }
+    
+    function stopAutoScroll() {
+        if (autoScrollInterval) {
+            clearInterval(autoScrollInterval);
+        }
+    }
+    
+    function resetAutoScroll() {
+        stopAutoScroll();
+        startAutoScroll();
+    }
     
     // Previous button
     if (prevBtn) {
         prevBtn.addEventListener('click', () => {
-            const newIndex = currentIndex === 0 ? cards.length - 1 : currentIndex - 1;
-            showCard(newIndex);
+            prevSlide();
+            resetAutoScroll();
         });
     }
     
     // Next button
     if (nextBtn) {
         nextBtn.addEventListener('click', () => {
-            const newIndex = currentIndex === cards.length - 1 ? 0 : currentIndex + 1;
-            showCard(newIndex);
+            nextSlide();
+            resetAutoScroll();
         });
     }
     
     // Indicator clicks
     indicators.forEach((indicator, index) => {
         indicator.addEventListener('click', () => {
-            showCard(index);
+            scrollToSlide(index);
+            resetAutoScroll();
         });
     });
     
-    // Auto-advance carousel every 5 seconds
-    setInterval(() => {
-        const newIndex = currentIndex === cards.length - 1 ? 0 : currentIndex + 1;
-        showCard(newIndex);
-    }, 5000);
+    // Pause auto-scroll on hover
+    track.addEventListener('mouseenter', stopAutoScroll);
+    track.addEventListener('mouseleave', startAutoScroll);
+    
+    // Handle window resize
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            scrollToSlide(currentIndex);
+        }, 250);
+    });
+    
+    // Start auto-scrolling
+    startAutoScroll();
+    
+    // Initialize first slide
+    scrollToSlide(0);
 }
